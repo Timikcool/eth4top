@@ -1,0 +1,22 @@
+.app {
+  background: var(--black);
+  height: 100%;
+}
+.header {
+  background: var(--jet);
+  nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+  }
+  a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    padding: 10px;
+    &:hover {
+      color: var(--red);
+    }
+  }
+}
