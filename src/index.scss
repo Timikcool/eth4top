@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Questrial');
 body {
   --green: #4ecdc4;
-  --jet: #372f2f;
+  --jet: #333;
   --red: #f72c25;
+  --dark-red: hsl(2, 72%, 45%);
   --black: #0d1b1e;
   color: white;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Questrial', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

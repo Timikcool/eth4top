@@ -1,0 +1,18 @@
+$primary-color: white;
+// How you import this will depend heavily on your build setup
+// If using webpack though, `~` refers to node_modules
+// @import '~loaders.css/src/animations/line-scale.scss'
+// @import 'loaders.css/src/animations/line-scale.scss';
+
+.top-container {
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+    height: 100px;
+  display: block;
+}
