@@ -1,6 +1,6 @@
 import { render } from 'inferno';
 import './index.scss';
-import App from './App';
+import App from './app';
 import * as serviceWorker from './serviceWorker';
 
 render(<App />, document.getElementById('root'));

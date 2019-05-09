@@ -1,10 +1,9 @@
 import { version, Component } from 'inferno';
 import { BrowserRouter, Route, Switch, NavLink } from 'inferno-router';
-import Logo from './logo';
 import './app.scss';
-import Home from './Home';
-import Top from './Top';
-import Pay from './Pay';
+import Home from './home';
+import Top from './top';
+import Pay from './send';
 
 class App extends Component {
   render() {
