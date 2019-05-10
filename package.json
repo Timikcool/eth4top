@@ -5,19 +5,22 @@
   "dependencies": {
     "axios": "^0.18.0",
     "ethers": "^4.0.27",
+    "fortmatic": "^0.7.2",
     "inferno": "^7.1.12",
     "inferno-compat": "^7.1.12",
     "inferno-router": "^7.1.12",
     "inferno-scripts": "7.0.4",
     "loaders.css": "^0.1.2",
     "node-sass": "^4.12.0",
-    "react-loaders": "^3.0.1"
+    "react-loaders": "^3.0.1",
+    "serve": "^11.0.0"
   },
   "scripts": {
     "start": "inferno-scripts start",
     "build": "inferno-scripts build",
     "test": "inferno-scripts test",
-    "eject": "inferno-scripts eject"
+    "eject": "inferno-scripts eject",
+    "now-build": "inferno-scripts build && serve -s build"
   },
   "eslintConfig": {
     "extends": "inferno-app"
