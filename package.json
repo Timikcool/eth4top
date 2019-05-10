@@ -20,7 +20,7 @@
     "build": "inferno-scripts build",
     "test": "inferno-scripts test",
     "eject": "inferno-scripts eject",
-    "now-build": "inferno-scripts build && serve -s build"
+    "now-build": "npm run build && serve -s build"
   },
   "eslintConfig": {
     "extends": "inferno-app"
