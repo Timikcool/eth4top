@@ -6,31 +6,48 @@ pragma solidity >=0.4.25 <0.6.0;
 // token, see: https://github.com/ConsenSys/Tokens. Cheers!
 
 contract EthTop {
+	address owner;
+	uint amout;
+
+	// описывает один пост
+	struct Post {
+		string text; // содержание поста
+		uint id; //  уникальный id ( тупо индекс будет )
+		uint price; // сколько бабок заплачено - по нему сортируем
+		address author; // да
+	};
 
   // массив для хранения постов
-  // маппинг посты => цены
-
-	mapping (address => uint) balances;
-
-	event Transfer(address indexed _from, address indexed _to, uint256 _value);
+	Post[] public posts;
 
 	constructor() public {
-		balances[tx.origin] = 10000;
+		owner = msg.sender;
+		amount = 0;
 	}
 
-	function sendCoin(address receiver, uint amount) public returns(bool sufficient) {
-		if (balances[msg.sender] < amount) return false;
-		balances[msg.sender] -= amount;
-		balances[receiver] += amount;
-		emit Transfer(msg.sender, receiver, amount);
-		return true;
+	// пост создан
+	event PostCreated(string _text, uint indexed _id, uint _price, address indexed _author);
+	// пост такой-то получил стлько-то денег
+	event PostUpdated(uint indexed _id, uint _price, address indexed _author);
+
+	function createPost(string _text) external payable {
+		uint id = posts.push( Post(_text, 0, msg.value, msg.sender)) - 1;
+		posts[id].id = id;
+		return posts[id];
 	}
 
-	function getBalanceInEth(address addr) public view returns(uint){
-		return ConvertLib.convert(getBalance(addr),2);
+	function updatePost(uint _id) external payable {
+		uint money = msg.value;
+		amout += money; 
+		posts[_id].price += money;// тут money уже может быть равен нулю
 	}
 
-	function getBalance(address addr) public view returns(uint) {
-		return balances[addr];
+	function getPosts(uint _count ,uint _offset) external view {
+
+	}
+
+	function widthdraw() {
+		require( msg.sender == owner);
+		owner.transfer( address(this).balance );
 	}
 }
