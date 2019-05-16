@@ -7,7 +7,7 @@ pragma solidity >=0.4.25 <0.6.0;
 
 contract EthTop {
 	address owner;
-	uint amout;
+	uint amount; // деньги на контракте
 
 	// описывает один пост
 	struct Post {
@@ -15,7 +15,7 @@ contract EthTop {
 		uint id; //  уникальный id ( тупо индекс будет )
 		uint price; // сколько бабок заплачено - по нему сортируем
 		address author; // да
-	};
+	}
 
   // массив для хранения постов
 	Post[] public posts;
@@ -30,24 +30,25 @@ contract EthTop {
 	// пост такой-то получил стлько-то денег
 	event PostUpdated(uint indexed _id, uint _price, address indexed _author);
 
-	function createPost(string _text) external payable {
-		uint id = posts.push( Post(_text, 0, msg.value, msg.sender)) - 1;
+	function createPost(string memory _text) public payable returns (uint){
+		uint id = posts.push(Post(_text, 0, msg.value, msg.sender)) - 1;
 		posts[id].id = id;
-		return posts[id];
+		emit PostCreated(_text, id, msg.value, msg.sender);
+		return id;
 	}
 
-	function updatePost(uint _id) external payable {
+	/*(function updatePost(uint _id) external payable {
 		uint money = msg.value;
-		amout += money; 
+		amout += money;
 		posts[_id].price += money;// тут money уже может быть равен нулю
-	}
+	}*/
 
-	function getPosts(uint _count ,uint _offset) external view {
+	/*function getPosts(uint _count ,uint _offset) external view {
+		return posts;
+	}*/
 
-	}
-
-	function widthdraw() {
+	/*function widthdraw() public {
 		require( msg.sender == owner);
 		owner.transfer( address(this).balance );
-	}
+	}*/
 }
