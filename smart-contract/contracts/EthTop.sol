@@ -14,6 +14,7 @@ contract EthTop {
 		string text; // содержание поста
 		uint id; //  уникальный id ( тупо индекс будет )
 		uint price; // сколько бабок заплачено - по нему сортируем
+		uint timestamp; // когда был создан пост
 		address author; // да
 	}
 
@@ -31,7 +32,15 @@ contract EthTop {
 	event PostUpdated(uint indexed _id, uint _price, address indexed _author);
 
 	function createPost(string memory _text) public payable returns (uint){
-		uint id = posts.push(Post(_text, 0, msg.value, msg.sender)) - 1;
+		uint id = posts.push(
+			Post(
+				_text,
+				0,
+				msg.value,
+				now,
+				msg.sender
+			)
+		) - 1;
 		posts[id].id = id;
 		emit PostCreated(_text, id, msg.value, msg.sender);
 		return id;
