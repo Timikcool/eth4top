@@ -1,3 +1,7 @@
+## About
+Platform that accepts payments in ETH and shows your message to the world.
+Made for fun. 
+
 ## Install
 
 ### `npm install`
