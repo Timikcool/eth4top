@@ -8,6 +8,10 @@ $primary-color: white;
     height: 100%;
     display: flex;
     position: relative;
+    .top-list {
+      margin: 0 auto;
+    max-width: 600px;
+    }
 }
 .loader-hidden {
   display: none;
