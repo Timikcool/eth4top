@@ -2,7 +2,7 @@ import { Component } from 'inferno';
 import Loader from '../common/loader';
 import './top.scss';
 import { connectToEth } from '../common/ethApi';
-import Post from './post';
+import Post from './Post';
 class Top extends Component {
   state = {
     fetching: true
