@@ -1,5 +1,5 @@
 {  "version": 2,
-    "builds": [{ "src": "front-end/package.json", "use": "@now/static-build" ,"config": { "distDir": "build" }}],
+    "builds": [{ "src": "front-end/package.json", "use": "@now/static-build" ,"config": { "distDir": "front-end" }}],
     "routes": [
         { "src": "/(.*)", "dest": "/front-end" }
     ],
