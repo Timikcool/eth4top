@@ -1,0 +1,22 @@
+.send-container {
+    .send {
+        color: var(--red);
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        max-width: 600px;
+        text-align: center;
+
+        input,button {
+            background: transparent;
+            color: var(--red);
+            border: 2px solid white;
+            border-radius: 14px;
+            padding: 20px;
+            &:focus{
+                outline: none;
+                border-color: var(--dark-red);
+            }
+        }
+    }
+}

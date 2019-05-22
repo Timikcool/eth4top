@@ -1,3 +1,4 @@
+import './post.scss';
 export default ({author, content, timestamp, eth}) => (<div className="post">
     <div className="post-author">{author}</div>
     <div className="post-content">{content}</div>

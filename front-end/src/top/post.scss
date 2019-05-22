@@ -1,0 +1,34 @@
+.post {
+    padding: 20px;
+    border: 2px solid var(--dark-red);
+    margin: 10px 0;
+    border-radius: 14px;
+    &-author {
+        font-size: 0.75em;
+        opacity: 0.65;
+
+    }
+    &-time-and-eth {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75em;
+        .time {
+            opacity: 0.65;
+        }
+        .eth {
+            color: var(--green);
+            font-weight: bold;
+            font-size: 0.85rem;
+            &::after {
+                content: " ETH ";
+            }
+        }
+    
+    }
+    &-content {
+        margin: 10px 0;
+        a {
+            color: var(--red);
+        }
+    }
+}
