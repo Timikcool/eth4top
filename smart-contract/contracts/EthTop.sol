@@ -105,6 +105,6 @@ contract EthTop {
 
 	function widthdraw() public {
 		require(msg.sender == owner, "Only owner can withdraw money from the contract");
-		address(uint160(address(this).balance)).transfer(amount);
+		msg.sender.transfer(amount);
 	}
 }
