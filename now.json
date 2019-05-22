@@ -1,7 +1,7 @@
 {  "version": 2,
     "builds": [{ "src": "front-end/package.json", "use": "@now/static-build" ,"config": { "distDir": "build" }}],
     "routes": [
-        { "src": "/(.*)", "dest": "/front-end" }
+        { "src": "/(.*)", "dest": "/front-end/build" }
     ],
     "alias":["eth4top.now.sh"]
 }
