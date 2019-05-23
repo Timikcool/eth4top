@@ -1,5 +1,4 @@
 pragma solidity >=0.4.25 <0.6.0;
-pragma experimental ABIEncoderV2;
 // This is just a simple example of a coin-like contract.
 // It is not standards compatible and cannot be expected to talk to other
 // coin/token contracts. If you want to create a standards-compliant
@@ -90,7 +89,7 @@ contract EthTop {
 	function getAllPosts()
 		external
 		view
-		returns(string[] memory, uint[] memory, uint[] memory, uint[] memory, address[] memory)
+		returns(/*string[] memory, */uint[] memory, uint[] memory, uint[] memory, address[] memory)
 	{
 		uint size = posts.length;
 		string[] memory texts = new string[](size);
@@ -107,7 +106,7 @@ contract EthTop {
 			authors[i] = posts[i].author;
 		}
 
-		return (texts, ids, prices, timestamps, authors);
+		return (/*texts, */ids, prices, timestamps, authors);
 	}
 
 	function getAmount() public view returns (uint) {
