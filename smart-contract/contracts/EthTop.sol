@@ -1,6 +1,4 @@
 pragma solidity >=0.4.25 <0.6.0;
-pragma experimental ABIEncoderV2;
-
 // This is just a simple example of a coin-like contract.
 // It is not standards compatible and cannot be expected to talk to other
 // coin/token contracts. If you want to create a standards-compliant
@@ -64,7 +62,7 @@ contract EthTop {
 		return sortedPosts;
 	}
 
-	function getTopTenPosts() external view returns (Post[] memory) {
+	/*function getTopTenPosts() external view returns (Post[] memory) {
 		Post[] memory sortedPosts = sortByPrice();
 		uint size = sortedPosts.length < 10 ? sortedPosts.length : 10;
 		Post[] memory topTen = new Post[] (size);
@@ -73,7 +71,7 @@ contract EthTop {
 			topTen[i] = sortedPosts[i];
 		}
 		return topTen;
-	}
+	}*/
 
 	function getTopTenIds() external view returns ( uint[] memory ) {
 		Post[] memory sortedPosts = sortByPrice();
@@ -88,15 +86,27 @@ contract EthTop {
 		return topTen;
 	}
 
-	function getPosts(uint _count, uint _offset) external view returns( Post[] memory) {
-		Post[] memory result = new Post[] ( _count);
-		uint counter = 0;
-		for( uint i = _offset; i < _offset + _count ; i++ ) {
-			if( i < posts.length) {
-				result[counter] = posts[i];
-				counter++;
-			}
+	function getAllPosts()
+		external
+		view
+		returns(/*string[] memory, */uint[] memory, uint[] memory, uint[] memory, address[] memory)
+	{
+		uint size = posts.length;
+		string[] memory texts = new string[](size);
+		uint[] memory ids = new uint[](size);
+		uint[] memory prices = new uint[](size);
+		uint[] memory timestamps = new uint[](size);
+		address[] memory authors = new address[](size);
+
+		for( uint i = 0; i < size; i++ ) {
+			texts[i] = posts[i].text;
+			ids[i] = posts[i].id;
+			prices[i] = posts[i].price;
+			timestamps[i] = posts[i].timestamp;
+			authors[i] = posts[i].author;
 		}
+
+		return (/*texts, */ids, prices, timestamps, authors);
 	}
 
 	function getAmount() public view returns (uint) {
@@ -105,6 +115,6 @@ contract EthTop {
 
 	function widthdraw() public {
 		require(msg.sender == owner, "Only owner can withdraw money from the contract");
-		address(uint160(address(this).balance)).transfer(amount);
+		msg.sender.transfer(amount);
 	}
 }
