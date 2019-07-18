@@ -17,7 +17,7 @@ contract EthTop {
 		address author; // да
 	}
 
-  	// массив для хранения постов
+  // массив для хранения постов
 	Post[] public posts;
 
 	constructor() public {
@@ -25,7 +25,7 @@ contract EthTop {
 		amount = 0;
 	}
 
-	// пост создан
+	// событие создания поста
 	event PostCreated(string _text, uint indexed _id, uint _price, address indexed _author);
 
 	function createPost(string memory _text) public payable returns (uint){
