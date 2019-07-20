@@ -2,7 +2,7 @@
 import { ethers } from 'ethers';
 import Web3 from 'web3';
 import ABI from './abi.json';
-const ADDRESS = '0x131C2a54d7609a1E82F1CEB159a9E32a36037789';
+const ADDRESS = '0x9e1a97c3860531cdc5ac3e9bf02582ae53a30679';
 
 export const connectToEth = async () => {
   //обязательный шаг
