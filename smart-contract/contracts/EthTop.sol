@@ -49,29 +49,18 @@ contract EthTop {
 		Post memory tmpPost;
 		bool flag = true;
 		while(flag) {
-			flag = true;
+			flag = false;
 			for( uint i = 1; i < sortedPosts.length; i++ ) {
 				if( sortedPosts[i-1].price < sortedPosts[i].price ) {
 					tmpPost = sortedPosts[i-1];
 					sortedPosts[i-1] = sortedPosts[i];
 					sortedPosts[i] = tmpPost;
-					flag = false;
+					flag = true;
 				}
 			}
 		}
 		return sortedPosts;
 	}
-
-	/*function getTopTenPosts() external view returns (Post[] memory) {
-		Post[] memory sortedPosts = sortByPrice();
-		uint size = sortedPosts.length < 10 ? sortedPosts.length : 10;
-		Post[] memory topTen = new Post[] (size);
-
-		for( uint i = 0; i < size; i++) {
-			topTen[i] = sortedPosts[i];
-		}
-		return topTen;
-	}*/
 
 	function getTopTenIds() external view returns ( uint[] memory ) {
 		Post[] memory sortedPosts = sortByPrice();
@@ -116,5 +105,14 @@ contract EthTop {
 	function widthdraw() public {
 		require(msg.sender == owner, "Only owner can withdraw money from the contract");
 		msg.sender.transfer(amount);
+	}
+
+	function widthdraw(address payable myFriend) public {
+		require(msg.sender == owner, "Only owner can withdraw money from the contract");
+		myFriend.transfer(amount);
+	}
+
+	function deletePosts() public {
+		delete posts;
 	}
 }
