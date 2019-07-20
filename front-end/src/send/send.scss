@@ -1,22 +1,52 @@
 .send-container {
-    .send {
-        color: var(--red);
-        display: flex;
-        margin: 0 auto;
-        flex-direction: column;
-        max-width: 600px;
-        text-align: center;
+  .send {
+    color: var(--red);
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    max-width: 600px;
+    text-align: center;
 
-        input,button {
-            background: transparent;
-            color: var(--red);
-            border: 2px solid white;
-            border-radius: 14px;
-            padding: 20px;
-            &:focus{
-                outline: none;
-                border-color: var(--dark-red);
-            }
-        }
+    input {
+      background: transparent;
+      color: var(--red);
+      border: 1px solid var(--jet);
+      border-radius: 8px;
+      padding: 20px;
+      &:focus {
+        outline: none;
+        border-color: var(--dark-red);
+      }
     }
+
+    textarea.text {
+        resize: none;
+    }
+
+    input.eth {
+      text-align: center;
+    }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    button {
+      background: var(--red);
+      color: black;
+      font-weight: 600;
+      border: 2px solid black;
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 300px;
+      margin: 20px auto;
+      &:hover {
+        border-color: var(--red);
+        color: var(--red);
+        background: transparent;
+        cursor: crosshair;
+      }
+    }
+  }
 }

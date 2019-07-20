@@ -8,6 +8,7 @@ node_modules
 
 # production
 /build
+smart-contract/build
 
 # misc
 .DS_Store
@@ -22,3 +23,4 @@ yarn-error.log*
 
 *.orig
 package-lock.json
+
