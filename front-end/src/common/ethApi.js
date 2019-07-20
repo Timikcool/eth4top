@@ -2,7 +2,7 @@
 import { ethers } from 'ethers';
 import Web3 from 'web3';
 import ABI from './abi.json';
-const ADDRESS = '0x05FAAE3F72c2Ea4FCd88B564644e071EbEa2de8a';
+const ADDRESS = '0x131C2a54d7609a1E82F1CEB159a9E32a36037789';
 
 export const connectToEth = async () => {
   //обязательный шаг
@@ -21,7 +21,7 @@ export const getContract = web3 => {
 
 export const getWeb3 = () => {
   return new Web3(Web3.givenProvider || 'http://localhost:8545');
-}
+};
 
 // получаем провайдер
 export const getProvider = () => {
@@ -38,14 +38,14 @@ export const getAddress = callback => {
 };
 
 // этим способом можно получить правильный порядок айдишников постов.
-export const getSortedPosts = async (web3, contract, callback) => {
+export const getSortedPosts = async (callback) => {
   const ids = await getContract()
     .methods.getTopTenIds()
     .call();
 
   //тут по id получаем посты
-  await Promise.all(ids.map(id => this.getPost(contract, id))).then(result => {
-    const postsFormatted = result.map(post => this.normalizePost(post));
+  await Promise.all(ids.map(id => getPost(id))).then(result => {
+    const postsFormatted = result.map(post => normalizePost(post));
     callback(postsFormatted);
   });
 };
@@ -76,12 +76,17 @@ export const createPost = (
   confirmationCallback,
   errorCallback
 ) => {
-  getContract().methods
-    .createPost(text)
+  getContract()
+    .methods.createPost(text)
     .send({
       from: account,
       value: window.web3.toWei(ether.toString(), 'ether')
     })
-    .on('confirmation', confirmationCallback)
+    .on('confirmation', (number, rec) => {
+      // ждём двух подтверждений 
+      if (number === 1) {
+        confirmationCallback(rec);
+      }
+    })
     .on('error', errorCallback);
 };
