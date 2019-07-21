@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import logo from './logo.svg';
 import './App.css';
 import ABI from './EthTop.json';
-const ADDRESS = '0x0eFf5a3C73aCff250920f2c7D4d22105830c40a8';
+const ADDRESS = '0x040c2E1e3adEf81F8701b417E51B6d53d89Fa3bD';
 
 class App extends Component {
   componentDidMount = async () => {
@@ -17,9 +17,9 @@ class App extends Component {
     const Top = new web3.eth.Contract(ABI.abi, ADDRESS);
     console.log(Top);
 
-    //this.createPost(web3, Top, accounts[0], 'Post 333333', 1.5);
+    //this.createPost(web3, Top, accounts[0], 'Second post', 10);
     //this.getPost(Top, 1);
-    await this.getSortedPosts(web3, Top);
+    //await this.getSortedPosts(web3, Top);
     //this.getAllPosts(Top);
   }
 
