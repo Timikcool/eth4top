@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import logo from './logo.svg';
 import './App.css';
 import ABI from './EthTop.json';
-const ADDRESS = '0x040c2E1e3adEf81F8701b417E51B6d53d89Fa3bD';
+const ADDRESS = '0xa351b276B31f1f33E5ef080Db352D7c5239A94a0';
 
 class App extends Component {
   componentDidMount = async () => {
@@ -18,11 +18,11 @@ class App extends Component {
     const Top = new web3.eth.Contract(ABI.abi, ADDRESS);
     console.log(Top);
 
-    //this.createPost(web3, Top, accounts[0], 'Post', 3);
+    //this.createPost(web3, Top, accounts[0], 'this is the post', 2.5);
     //this.getPost(Top, 1);
     //await this.getSortedPosts(web3, Top);
     //this.getAllPosts(Top);
-    this.getTenPostTexts(Top);
+    this.getTenPosts(Top, 1);
   }
 
   createPost = (web3, Top, account, text, ether) => {
@@ -78,8 +78,21 @@ class App extends Component {
     // 3 - authors
   }
 
-  getTenPostTexts = (Top) => {
-    Top.methods.getTenPostsTexts().call().then(console.log);
+  getTenPosts = (Top, page) => {
+    Top.methods.getTenPosts(page).call().then(res => {
+      const pageSize = 3;
+      let posts = [];
+      for( let i = 0; i < pageSize; i ++) {
+        posts.push({
+          id: res.ids[i],
+          author: res.authors[i],
+          text: res.texts[i],
+          timestamp: res.timestamps[i],
+          price: res.prices[i]
+        })
+      }
+      console.log(posts);
+    });
   }
 
   normalizePost = (web3, post) => {

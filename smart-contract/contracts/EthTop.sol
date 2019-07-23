@@ -7,7 +7,7 @@ pragma experimental ABIEncoderV2;
 
 contract EthTop {
 	address owner;
-	uint amount; // деньги на контракте
+	uint private amount; // деньги на контракте
 
 	// описывает один пост
 	struct Post {
@@ -63,52 +63,29 @@ contract EthTop {
 		return sortedPosts;
 	}
 
-	function getTopTenIds() external view returns ( uint[] memory ) {
-		Post[] memory sortedPosts = sortByPrice();
-		uint size = sortedPosts.length < 10 ? sortedPosts.length : 10;
-		uint[] memory topTen = new uint[] (size);
-
-		for( uint i = 0; i < size; i++) {
-			if( i < sortedPosts.length ) {
-				topTen[i] = sortedPosts[i].id;
-			}
-		}
-		return topTen;
-	}
-
-	function getAllPosts()
+	function getTenPosts(uint page)
 		external
 		view
-		returns(uint[] memory, uint[] memory, uint[] memory, address[] memory)
-	{
-		uint size = posts.length;
-		string[] memory texts = new string[](size);
-		uint[] memory ids = new uint[](size);
-		uint[] memory prices = new uint[](size);
-		uint[] memory timestamps = new uint[](size);
-		address[] memory authors = new address[](size);
-
-		for( uint i = 0; i < size; i++ ) {
-			texts[i] = posts[i].text;
-			ids[i] = posts[i].id;
-			prices[i] = posts[i].price;
-			timestamps[i] = posts[i].timestamp;
-			authors[i] = posts[i].author;
-		}
-
-		return (ids, prices, timestamps, authors);
-	}
-
-	function getTenPostsTexts()
-		external
-		view
-		returns(string[10] memory postsPage) {
-			for( uint i = 0; i < 10; i++) {
-				if( i < posts.length ) {
-					postsPage[i] = posts[i].text;
+		returns(
+			uint[10] memory ids,
+			string[10] memory texts,
+			uint[10] memory prices,
+			uint[10] memory timestamps,
+			address[10] memory authors
+		) {
+			Post[] memory sortedPosts = sortByPrice();
+			uint index = 0;
+			for( uint i = (page - 1) * 10; i < page * 10; i++) {
+				if( i < sortedPosts.length ) {
+					ids[index] = sortedPosts[i].id;
+					texts[index] = sortedPosts[i].text;
+					prices[index] = sortedPosts[i].price;
+					timestamps[index] = sortedPosts[i].timestamp;
+					authors[index] = sortedPosts[i].author;
 				}
+				index++;
 			}
-			return postsPage;
+			return (ids,texts,prices,timestamps,authors);
 		}
 
 	function getAmount() public view returns (uint) {
