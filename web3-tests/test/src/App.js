@@ -7,20 +7,22 @@ const ADDRESS = '0x040c2E1e3adEf81F8701b417E51B6d53d89Fa3bD';
 
 class App extends Component {
   componentDidMount = async () => {
-
+    window.ethereum.enable();
     // getting account via metamask
     const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
     const accounts = await web3.eth.getAccounts();
+    console.log(accounts);
     console.log(accounts[0]);
 
     // connection to the contract
     const Top = new web3.eth.Contract(ABI.abi, ADDRESS);
     console.log(Top);
 
-    //this.createPost(web3, Top, accounts[0], 'Second post', 10);
+    //this.createPost(web3, Top, accounts[0], 'Post', 3);
     //this.getPost(Top, 1);
     //await this.getSortedPosts(web3, Top);
     //this.getAllPosts(Top);
+    this.getTenPostTexts(Top);
   }
 
   createPost = (web3, Top, account, text, ether) => {
@@ -74,6 +76,10 @@ class App extends Component {
     // 1 - prices
     // 2 - timestamps
     // 3 - authors
+  }
+
+  getTenPostTexts = (Top) => {
+    Top.methods.getTenPostsTexts().call().then(console.log);
   }
 
   normalizePost = (web3, post) => {
