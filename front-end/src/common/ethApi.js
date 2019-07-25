@@ -38,7 +38,7 @@ export const getAddress = callback => {
 };
 
 // этим способом можно получить правильный порядок айдишников постов.
-export const getSortedPosts = async (callback) => {
+export const getSortedPosts = async callback => {
   const ids = await getContract()
     .methods.getTopTenIds()
     .call();
@@ -68,6 +68,31 @@ export const getPost = postId => {
     .call();
 };
 
+export const getTenPosts = (page, callback) => {
+  return getContract()
+    .methods.getTenPosts(page)
+    .call()
+    .then(res => {
+      const pageSize = 10;
+      let posts = [];
+      for (let i = 0; i < pageSize; i++) {
+        posts.push({
+          id: res.ids[i].toNumber(),
+          author: res.authors[i],
+          text: res.texts[i],
+          timestamp: res.timestamps[i].toNumber(),
+          price: res.prices[i].toString()
+        });
+      }
+      callback(
+        posts.filter(
+          ({ author }) =>
+            author !== '0x0000000000000000000000000000000000000000'
+        )
+      );
+    });
+};
+
 // создаём пост, вешаем обработчики
 export const createPost = (
   account,
@@ -82,11 +107,20 @@ export const createPost = (
       from: account,
       value: window.web3.toWei(ether.toString(), 'ether')
     })
+    .on('transactionHash', hash => {
+      console.log('# transaction hash ', hash);
+    })
+    .on('receipt', receipt => {
+      console.log('# receipt ', receipt);
+    })
     .on('confirmation', (number, rec) => {
-      // ждём двух подтверждений 
+      // ждём первого подтверждения, обычно ждут 2-3
+      console.log('# confirmation ', number, rec);
       if (number === 1) {
         confirmationCallback(rec);
       }
     })
     .on('error', errorCallback);
 };
+
+export const subscribeToNewPostEvent = callback => {};

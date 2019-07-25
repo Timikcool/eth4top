@@ -1,7 +1,7 @@
 import { Component } from 'inferno';
 import Loader from '../common/loader';
 import './top.scss';
-import { connectToEth, getSortedPosts } from '../common/ethApi';
+import { connectToEth, getTenPosts } from '../common/ethApi';
 import Post from './Post';
 class Top extends Component {
   state = {
@@ -11,7 +11,7 @@ class Top extends Component {
 
   componentDidMount() {
     connectToEth();
-    getSortedPosts(this.onPostsFetched.bind(this));
+    getTenPosts(1, this.onPostsFetched.bind(this));
   }
 
   onPostsFetched(posts) {
