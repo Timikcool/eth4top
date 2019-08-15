@@ -75,13 +75,15 @@ export const getTenPosts = (page, callback) => {
     .then(res => {
       const pageSize = 10;
       let posts = [];
+      console.log(res);
+      
       for (let i = 0; i < pageSize; i++) {
         posts.push({
-          id: res.ids[i].toNumber(),
+          id: res.ids[i],
           author: res.authors[i],
           text: res.texts[i],
-          timestamp: res.timestamps[i].toNumber(),
-          price: res.prices[i].toString()
+          timestamp: res.timestamps[i],
+          price: res.prices[i]
         });
       }
       callback(
