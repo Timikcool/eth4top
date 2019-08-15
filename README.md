@@ -1,6 +1,11 @@
 ## About
 Platform that accepts payments in ETH and shows your message to the world.
-Made for fun. 
+Made for fun.
+Please, make sure you are using [Metamask](https://metamask.io/) and [Rinkeby testnet](https://www.rinkeby.io) to check it out.
+
+## Monorepo
+* Backend - [Ethereum smart contract written on Solidity](https://github.com/ethereum/solidity) 
+* Frontend - [Inferno](https://github.com/infernojs), [web3](https://github.com/ethereum/web3.js)
 
 ## Install
 
