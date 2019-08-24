@@ -1,4 +1,17 @@
 {  "version": 2,
-    "builds": [{ "src": "package.json", "use": "@now/static-build" ,"config": { "distDir": "build" }}],
-    "alias":["eth4top.now.sh"]
+    "alias":["eth4top.now.sh"],
+    "routes": [
+        {
+          "src": "/(.*)\\.(.*)",
+          "dest": "/build/$1.$2"
+        },
+        {
+          "src": "/",
+          "dest": "/build/index.html"
+        },
+        {
+          "src": "/(.*)",
+          "status": 301, "headers": { "Location": "/" }
+        }
+      ]
 }

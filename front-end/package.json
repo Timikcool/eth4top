@@ -1,9 +1,8 @@
 {
-  "name": "pay4top",
-  "version": "0.1.0",
+  "name": "eth4top",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
     "fortmatic": "^0.7.2",
     "inferno": "^7.1.12",
     "inferno-compat": "^7.1.12",
