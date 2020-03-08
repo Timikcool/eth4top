@@ -1,8 +1,8 @@
 // import axios from 'axios';
-import { ethers } from 'ethers';
-import Web3 from 'web3';
-import ABI from './abi.json';
-const ADDRESS = '0x55925f2f807b7c9df151f042165eed8c7d8a417a';
+import { ethers } from "ethers";
+import Web3 from "web3";
+import ABI from "./abi.json";
+const ADDRESS = "0x55925f2f807b7c9df151f042165eed8c7d8a417a";
 
 export const connectToEth = async () => {
   //обязательный шаг
@@ -19,15 +19,22 @@ export const getContract = web3 => {
   }
 };
 
+export const checkIsRinkeby = async () => {
+  const network = await getWeb3().eth.net.getNetworkType();
+  if (network !== "rinkeby") {
+    alert("You better connect your Metamask to Rinkeby network");
+  }
+};
+
 export const getWeb3 = () => {
-  return new Web3(Web3.givenProvider || 'http://localhost:8545');
+  return new Web3(Web3.givenProvider || "http://localhost:8545");
 };
 
 // получаем провайдер
 export const getProvider = () => {
   return window.web3
     ? new ethers.providers.Web3Provider(window.web3.currentProvider)
-    : ethers.getDefaultProvider('rinkeby');
+    : ethers.getDefaultProvider("rinkeby");
 };
 
 // получаем адрес клиента
@@ -76,7 +83,7 @@ export const getTenPosts = (page, callback) => {
       const pageSize = 10;
       let posts = [];
       console.log(res);
-      
+
       for (let i = 0; i < pageSize; i++) {
         posts.push({
           id: res.ids[i],
@@ -89,7 +96,7 @@ export const getTenPosts = (page, callback) => {
       callback(
         posts.filter(
           ({ author }) =>
-            author !== '0x0000000000000000000000000000000000000000'
+            author !== "0x0000000000000000000000000000000000000000"
         )
       );
     });
@@ -107,22 +114,22 @@ export const createPost = (
     .methods.createPost(text)
     .send({
       from: account,
-      value: window.web3.toWei(ether.toString(), 'ether')
+      value: window.web3.toWei(ether.toString(), "ether")
     })
-    .on('transactionHash', hash => {
-      console.log('# transaction hash ', hash);
+    .on("transactionHash", hash => {
+      console.log("# transaction hash ", hash);
     })
-    .on('receipt', receipt => {
-      console.log('# receipt ', receipt);
+    .on("receipt", receipt => {
+      console.log("# receipt ", receipt);
     })
-    .on('confirmation', (number, rec) => {
+    .on("confirmation", (number, rec) => {
       // ждём первого подтверждения, обычно ждут 2-3
-      console.log('# confirmation ', number, rec);
+      console.log("# confirmation ", number, rec);
       if (number === 1) {
         confirmationCallback(rec);
       }
     })
-    .on('error', errorCallback);
+    .on("error", errorCallback);
 };
 
 export const subscribeToNewPostEvent = callback => {};

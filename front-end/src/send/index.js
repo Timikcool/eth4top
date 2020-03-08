@@ -1,11 +1,11 @@
-import { Component } from 'inferno';
-import Loader from '../common/loader';
-import './send.scss';
-import { createPost, connectToEth } from '../common/ethApi';
+import { Component } from "inferno";
+import Loader from "../common/loader";
+import "./send.scss";
+import { createPost, connectToEth, checkIsRinkeby } from "../common/ethApi";
 class Send extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: '', ethers: 0.1, sending: false };
+    this.state = { text: "", ethers: 0.1, sending: false };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,6 +43,7 @@ class Send extends Component {
 
   componentDidMount() {
     connectToEth().then(address => console.log(address));
+    checkIsRinkeby();
   }
 
   render() {

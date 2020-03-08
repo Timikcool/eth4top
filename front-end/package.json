@@ -12,6 +12,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "react-loaders": "^3.0.1",
+    "react-perfect-scrollbar": "^1.5.8",
     "serve": "^11.0.0",
     "web3": "^1.0.0-beta.55"
   },

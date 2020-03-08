@@ -1,8 +1,10 @@
-import { Component } from 'inferno';
-import Loader from '../common/loader';
-import './top.scss';
-import { connectToEth, getTenPosts } from '../common/ethApi';
-import Post from './Post';
+import { Component } from "inferno";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import Loader from "../common/loader";
+import "./top.scss";
+import { connectToEth, getTenPosts, checkIsRinkeby } from "../common/ethApi";
+import Post from "./Post";
+
 class Top extends Component {
   state = {
     fetching: true,
@@ -11,6 +13,7 @@ class Top extends Component {
 
   componentDidMount() {
     connectToEth();
+    checkIsRinkeby();
     getTenPosts(1, this.onPostsFetched.bind(this));
   }
 
@@ -27,9 +30,11 @@ class Top extends Component {
           <Loader active />
         ) : (
           <div className="top-list">
-            {posts.map(props => (
-              <Post {...props} />
-            ))}
+            <PerfectScrollbar>
+              {posts.map(props => (
+                <Post {...props} />
+              ))}
+            </PerfectScrollbar>
           </div>
         )}
       </div>
